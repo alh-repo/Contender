@@ -11,3 +11,24 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+/* Default styles for mobile devices */
+.container {
+  width: 100%;
+  padding: 20px;
+}
+
+/* Media query for tablets (768px and above) */
+@media screen and (min-width: 768px) {
+  .container {
+    max-width: 768px;
+    margin: 0 auto;
+  }
+}
+
+/* Media query for desktops/large screens (992px and above) */
+@media screen and (min-width: 992px) {
+  .container {
+    max-width: 992px;
+  }
+}
