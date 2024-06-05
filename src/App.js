@@ -2,6 +2,12 @@ import logo from './logo.svg';
 import './App.css';
 import Button from './components/Button/Button'; // Import the Button component
 import DropdownButton from './components/DropdownButton/DropdownButton'; // Import the DropdownButton component
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Home from './pages/Home';
+import About from './pages/About';
+import Contact from './pages/Contact';
+import NoPage from './pages/NoPage';
+
 
 
 function App() {
@@ -13,6 +19,20 @@ function App() {
   };
 
   return (
+    <div>
+    <BrowserRouter>
+    <Routes>
+      <Route index element={<Home/>} />
+      <Route path="/Home" element={<Home/>} />
+      <Route path="/About" element={<About/>} />
+      <Route path="/Contact" element={<Contact/>} />
+      <Route path="*" element={<NoPage/>} />
+
+    </Routes>
+    
+    </BrowserRouter>
+    
+
     <div className="App">
       <header className="App-header">
         {/* <img src={logo} className="App-logo" alt="logo" /> */}
@@ -35,6 +55,7 @@ function App() {
     <br></br> 
     
       </header>
+    </div>
     </div>
   );
 }
