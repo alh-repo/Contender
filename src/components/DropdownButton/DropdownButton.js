@@ -5,10 +5,11 @@ import {
   DropdownMenu,
   DropdownItem,
 } from './DropdownButton.styles'; // Import styled components
+import { useNavigate } from 'react-router-dom';
 
 const DropdownButton = ({ options, onSelect }) => {
+  const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
-
   const toggleDropdown = () => {
     setIsOpen(!isOpen);
   };
@@ -16,6 +17,8 @@ const DropdownButton = ({ options, onSelect }) => {
   const handleSelect = (option) => {
     onSelect(option);
     setIsOpen(false);
+    navigate('/Sport');
+
   };
 
   return (
