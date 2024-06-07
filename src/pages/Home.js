@@ -20,7 +20,7 @@ export default function Home(){
         <div className="App">
       <header className="App-header">
         {/* <img src={logo} className="App-logo" alt="logo" /> */}
-        <h1>Ella's Challenger Website</h1>
+        <h1>Challenger Website</h1>
         
         <div>
       <Button onClick={handleClick}>Login</Button>
