@@ -17,7 +17,7 @@ const DropdownButton = ({ options, onSelect }) => {
   const handleSelect = (option) => {
     onSelect(option);
     setIsOpen(false);
-    navigate('/Sport');
+    navigate('/Sports');
 
   };
 

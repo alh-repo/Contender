@@ -1,11 +1,11 @@
 import Header from "../components/Header"
 
 
-export default function Sport(){
+export default function Sports(){
     return (
         <>
         <Header />
-        <h2>Sport Page</h2>
+        <h2>Sports Page</h2>
         </>
     )
 }

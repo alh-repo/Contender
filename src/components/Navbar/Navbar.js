@@ -44,8 +44,8 @@ const Navbar = () => {
             </NavLinks>
           </NavItem>
           <NavItem>
-            <NavLinks to="/contact-us" onClick={toggleMenu}>
-              Contact Us
+            <NavLinks to="/Sports" onClick={toggleMenu}>
+               Sports
             </NavLinks>
           </NavItem>
           <NavItem>
