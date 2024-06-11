@@ -49,7 +49,7 @@ const Navbar = () => {
             </NavLinks>
           </NavItem>
           <NavItem>
-            <NavLinks to="/SignUp" onClick={toggleMenu}>
+            <NavLinks to="/SignUp/SignUp" onClick={toggleMenu}>
               Sign Up
             </NavLinks>
           </NavItem>
