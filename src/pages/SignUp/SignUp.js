@@ -1,5 +1,6 @@
 // src/components/SignUp.js
 import React, { useState } from 'react';
+import axios from 'axios';
 import {
   SignUpContainer,
   SignUpForm,
@@ -14,9 +15,8 @@ const SignUp = () => {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [error, setError] = useState('');
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Basic validation
     if (!username || !password || !confirmPassword) {
       setError('Please fill in all fields');
       return;
@@ -25,11 +25,15 @@ const SignUp = () => {
       setError('Passwords do not match');
       return;
     }
-    // Handle sign-up logic here
-    console.log('Username:', username);
-    console.log('Password:', password);
-    // Clear the error message
-    setError('');
+
+    try {
+      const res = await axios.post('http://localhost:5000/api/auth/register', { username, password });
+      console.log('Registered:', res.data);
+      setError('');
+    } catch (err) {
+      console.error(err);
+      setError('Registration failed');
+    }
   };
 
   return (
