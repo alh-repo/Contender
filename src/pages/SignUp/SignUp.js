@@ -1,68 +1,62 @@
-// src/components/SignUp.js
+// src/pages/SignUp.js
 import React, { useState } from 'react';
-import axios from 'axios';
-import {
-  SignUpContainer,
-  SignUpForm,
-  SignUpInput,
-  SignUpButton,
-  SignUpErrorMessage,
-} from './SignUp.styles';
+import { registerUser } from '../../api';
+import { SignUpContainer, SignUpForm, FormInput, FormButton } from './SignUp.styles';
 
 const SignUp = () => {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
-  const [error, setError] = useState('');
+    const [formData, setFormData] = useState({
+        name: '',
+        email: '',
+        password: ''
+    });
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    if (!username || !password || !confirmPassword) {
-      setError('Please fill in all fields');
-      return;
-    }
-    if (password !== confirmPassword) {
-      setError('Passwords do not match');
-      return;
-    }
+    const { name, email, password } = formData;
 
-    try {
-      const res = await axios.post('http://localhost:5000/api/auth/register', { username, password });
-      console.log('Registered:', res.data);
-      setError('');
-    } catch (err) {
-      console.error(err);
-      setError('Registration failed');
-    }
-  };
+    const onChange = (e) => {
+        setFormData({ ...formData, [e.target.name]: e.target.value });
+    };
 
-  return (
-    <SignUpContainer>
-      <SignUpForm onSubmit={handleSubmit}>
-        <h2>Sign Up</h2>
-        {error && <SignUpErrorMessage>{error}</SignUpErrorMessage>}
-        <SignUpInput
-          type="text"
-          placeholder="Username"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-        />
-        <SignUpInput
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-        <SignUpInput
-          type="password"
-          placeholder="Confirm Password"
-          value={confirmPassword}
-          onChange={(e) => setConfirmPassword(e.target.value)}
-        />
-        <SignUpButton type="submit">Sign Up</SignUpButton>
-      </SignUpForm>
-    </SignUpContainer>
-  );
+    const onSubmit = async (e) => {
+        e.preventDefault();
+        try {
+            await registerUser({ name, email, password });
+            alert('User registered successfully!');
+        } catch (err) {
+            alert('Error registering user. Please try again.');
+        }
+    };
+
+    return (
+        <SignUpContainer>
+            <SignUpForm onSubmit={onSubmit}>
+                <FormInput
+                    type="text"
+                    placeholder="Name"
+                    name="name"
+                    value={name}
+                    onChange={onChange}
+                    required
+                />
+                <FormInput
+                    type="email"
+                    placeholder="Email"
+                    name="email"
+                    value={email}
+                    onChange={onChange}
+                    required
+                />
+                <FormInput
+                    type="password"
+                    placeholder="Password"
+                    name="password"
+                    value={password}
+                    onChange={onChange}
+                    required
+                />
+                <FormButton type="submit">Sign Up</FormButton>
+            </SignUpForm>
+        </SignUpContainer>
+    );
 };
 
 export default SignUp;

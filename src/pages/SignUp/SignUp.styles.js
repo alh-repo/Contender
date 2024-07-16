@@ -1,46 +1,43 @@
-// src/components/SignUp.styles.js
+// src/pages/SignUp.styles.js
 import styled from 'styled-components';
 
 export const SignUpContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  background-color: #f0f2f5;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-color: #f0f0f0;
 `;
 
 export const SignUpForm = styled.form`
-  display: flex;
-  flex-direction: column;
-  padding: 2rem;
-  background-color: #fff;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    background-color: #fff;
+    border-radius: 5px;
 `;
 
-export const SignUpInput = styled.input`
-  margin-bottom: 1rem;
-  padding: 0.5rem;
-  font-size: 1rem;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+export const FormInput = styled.input`
+    margin-bottom: 10px;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
 `;
 
-export const SignUpButton = styled.button`
-  padding: 0.5rem;
-  font-size: 1rem;
-  color: #fff;
-  background-color: #007bff;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
+export const FormButton = styled.button`
+    padding: 10px;
+    font-size: 16px;
+    color: #fff;
+    background-color: #007bff;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
 
-  &:hover {
-    background-color: #0056b3;
-  }
-`;
-
-export const SignUpErrorMessage = styled.div`
-  color: red;
-  margin-bottom: 1rem;
+    &:hover {
+        background-color: #0056b3;
+    }
 `;
