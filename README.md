@@ -43,40 +43,59 @@ The MERN stack is a combination of technologies used to create a full-stack web 
    cd contender/backend
 
 Install dependencies:
+
 To run the backend of a MERN stack application, you’ll need the following npm packages:
 
 Express: For creating the server and handling routing.
+bash
+Copy code
 npm install express
-
 Mongoose: For connecting to MongoDB and managing data.
+bash
+Copy code
 npm install mongoose
-
 Config: For managing configuration variables.
+bash
+Copy code
 npm install config
-
 Bcryptjs: For hashing passwords.
+bash
+Copy code
 npm install bcryptjs
-
 JSONWebToken: For creating and verifying JSON Web Tokens (JWT) for authentication.
+bash
+Copy code
 npm install jsonwebtoken
-
 Express-validator: For validating request data.
+bash
+Copy code
 npm install express-validator
-
 Nodemon (optional): For automatically restarting the server during development.
+bash
+Copy code
 npm install -D nodemon
-
 Start the backend server
+
+bash
+Copy code
 npm run start
 The backend server should now be running on http://localhost:5001.
 
-### Frontend
+Frontend
 Navigate to the frontend directory
-cd ../contender
-Install dependencies:
-npm install
 
+bash
+Copy code
+cd ../frontend
+Install dependencies:
+
+bash
+Copy code
+npm install
 Run the frontend application
+
+bash
+Copy code
 npm start
 The frontend application should now be running on http://localhost:3000.
 
@@ -93,9 +112,13 @@ API Endpoints
 Authentication
 Register
 URL: /api/auth/register
+
 Method: POST
+
 Description: Register a new user.
+
 Request Body:
+
 json
 Copy code
 {
@@ -105,6 +128,7 @@ Copy code
   "username": "username"
 }
 Response:
+
 json
 Copy code
 {
@@ -112,9 +136,13 @@ Copy code
 }
 Login
 URL: /api/auth/login
+
 Method: POST
+
 Description: Log in a user.
+
 Request Body:
+
 json
 Copy code
 {
@@ -122,8 +150,13 @@ Copy code
   "password": "userpassword"
 }
 Response:
+
 json
 Copy code
 {
   "token": "jwt-token"
 }
+Contributing
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+License
