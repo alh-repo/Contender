@@ -2,18 +2,20 @@
 
 This is a MERN stack setup and base for future web apps.
 
-MERN Stack Overview
+## MERN Stack Overview
+
 The MERN stack is a combination of technologies used to create a full-stack web application. It includes:
 
-MongoDB: A NoSQL database that stores data in a flexible, JSON-like format.
-Express.js: A web application framework for Node.js, providing robust features for building web and mobile applications.
-React: A JavaScript library for building user interfaces, particularly for single-page applications where you need a fast and interactive user experience.
-Node.js: A JavaScript runtime built on Chrome's V8 JavaScript engine, allowing you to run JavaScript on the server side.
-How the MERN Stack Works Together
-Frontend: React handles the client-side, rendering the user interface, managing user interactions, and making HTTP requests to the backend.
-Backend: Express.js (running on Node.js) handles the server-side logic, including routing, handling requests, and connecting to the database.
-Database: MongoDB stores and retrieves the application’s data. It connects to the backend through the Mongoose library, which provides a straightforward, schema-based solution to model your application data.
+- **MongoDB**: A NoSQL database that stores data in a flexible, JSON-like format.
+- **Express.js**: A web application framework for Node.js, providing robust features for building web and mobile applications.
+- **React**: A JavaScript library for building user interfaces, particularly for single-page applications where you need a fast and interactive user experience.
+- **Node.js**: A JavaScript runtime built on Chrome's V8 JavaScript engine, allowing you to run JavaScript on the server side.
 
+### How the MERN Stack Works Together
+
+- **Frontend**: React handles the client-side, rendering the user interface, managing user interactions, and making HTTP requests to the backend.
+- **Backend**: Express.js (running on Node.js) handles the server-side logic, including routing, handling requests, and connecting to the database.
+- **Database**: MongoDB stores and retrieves the application’s data. It connects to the backend through the Mongoose library, which provides a straightforward, schema-based solution to model your application data.
 
 ## Table of Contents
 
@@ -24,14 +26,19 @@ Database: MongoDB stores and retrieves the application’s data. It connects to 
   - [Running the Application](#running-the-application)
   - [Features](#features)
 - [API Endpoints](#api-endpoints)
+  - [Authentication](#authentication)
+    - [Register](#register)
+    - [Login](#login)
 - [Contributing](#contributing)
 - [License](#license)
 
 ## Installation
 
 ### Backend
+
 1. **Clone the repository**
 
+   ```bash
    git clone https://github.com/alh-repo/Contender.git
    cd contender/backend
 
