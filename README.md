@@ -1,73 +1,122 @@
-# Getting Started with Create React App
-
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-
-## Available Scripts
-
-In the project directory, you can run:
-
-### `npm start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
-
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
 # Contender
-# Contender
-# Contender
+
+This is a MERN stack setup and base for future web apps.
+
+MERN Stack Overview
+The MERN stack is a combination of technologies used to create a full-stack web application. It includes:
+
+MongoDB: A NoSQL database that stores data in a flexible, JSON-like format.
+Express.js: A web application framework for Node.js, providing robust features for building web and mobile applications.
+React: A JavaScript library for building user interfaces, particularly for single-page applications where you need a fast and interactive user experience.
+Node.js: A JavaScript runtime built on Chrome's V8 JavaScript engine, allowing you to run JavaScript on the server side.
+How the MERN Stack Works Together
+Frontend: React handles the client-side, rendering the user interface, managing user interactions, and making HTTP requests to the backend.
+Backend: Express.js (running on Node.js) handles the server-side logic, including routing, handling requests, and connecting to the database.
+Database: MongoDB stores and retrieves the application’s data. It connects to the backend through the Mongoose library, which provides a straightforward, schema-based solution to model your application data.
+
+
+## Table of Contents
+
+- [Installation](#installation)
+  - [Backend](#backend)
+  - [Frontend](#frontend)
+- [Usage](#usage)
+  - [Running the Application](#running-the-application)
+  - [Features](#features)
+- [API Endpoints](#api-endpoints)
+- [Contributing](#contributing)
+- [License](#license)
+
+## Installation
+
+### Backend
+1. **Clone the repository**
+
+   git clone https://github.com/alh-repo/Contender.git
+   cd contender/backend
+
+Install dependencies:
+To run the backend of a MERN stack application, you’ll need the following npm packages:
+
+Express: For creating the server and handling routing.
+npm install express
+
+Mongoose: For connecting to MongoDB and managing data.
+npm install mongoose
+
+Config: For managing configuration variables.
+npm install config
+
+Bcryptjs: For hashing passwords.
+npm install bcryptjs
+
+JSONWebToken: For creating and verifying JSON Web Tokens (JWT) for authentication.
+npm install jsonwebtoken
+
+Express-validator: For validating request data.
+npm install express-validator
+
+Nodemon (optional): For automatically restarting the server during development.
+npm install -D nodemon
+
+Start the backend server
+npm run start
+The backend server should now be running on http://localhost:5001.
+
+### Frontend
+Navigate to the frontend directory
+cd ../contender
+Install dependencies:
+npm install
+
+Run the frontend application
+npm start
+The frontend application should now be running on http://localhost:3000.
+
+Usage
+Running the Application
+To start the full application, make sure both the backend and frontend servers are running as described in the Installation section.
+
+Features
+User registration
+User login
+Styled-components for styling
+JWT authentication
+API Endpoints
+Authentication
+Register
+URL: /api/auth/register
+Method: POST
+Description: Register a new user.
+Request Body:
+json
+Copy code
+{
+  "name": "User Name",
+  "email": "user@example.com",
+  "password": "userpassword",
+  "username": "username"
+}
+Response:
+json
+Copy code
+{
+  "token": "jwt-token"
+}
+Login
+URL: /api/auth/login
+Method: POST
+Description: Log in a user.
+Request Body:
+json
+Copy code
+{
+  "email": "user@example.com",
+  "password": "userpassword"
+}
+Response:
+json
+Copy code
+{
+  "token": "jwt-token"
+}
