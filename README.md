@@ -74,7 +74,63 @@ The backend server should now be running on http://localhost:5001.
 Navigate to the frontend directory
 cd ../contender
 Install dependencies:
-npm install
+React - The core library for building user interfaces.
+npm install react
+
+React DOM - The package that provides DOM-specific methods for React.
+npm install react-dom
+
+
+React Router DOM - For routing and navigation in single-page applications.
+npm install react-router-dom
+
+
+Axios - A promise-based HTTP client for making requests to the backend.
+npm install axios
+
+Styled-Components - For styling components using tagged template literals.
+npm install styled-components
+
+React Hook Form - For handling form validation and submission.
+npm install react-hook-form
+
+React Icons - To easily include icons in your application.
+npm install react-icons
+
+Prop-Types - For type-checking React props.
+npm install prop-types
+
+dotenv - For managing environment variables (if you need to use .env files).
+npm install dotenv
+
+Redux (optional) - For state management, if needed.
+npm install redux react-redux
+
+Sass (optional) - For using SCSS in your project, if you prefer Sass over plain CSS.
+npm install sass
+
+React Toastify (optional) - For displaying notifications.
+npm install react-toastify
+
+Example package.json Dependencies Section
+Here’s what the dependencies section of your package.json might look like:
+
+"dependencies": {
+  "axios": "^0.21.1",
+  "prop-types": "^15.7.2",
+  "react": "^17.0.2",
+  "react-dom": "^17.0.2",
+  "react-hook-form": "^6.15.6",
+  "react-icons": "^4.2.0",
+  "react-router-dom": "^5.2.0",
+  "styled-components": "^5.3.0",
+  "dotenv": "^10.0.0",
+  "redux": "^4.1.1",
+  "react-redux": "^7.2.4",
+  "sass": "^1.35.2",
+  "react-toastify": "^7.0.3"
+}
+
 
 Run the frontend application
 npm start
