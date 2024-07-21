@@ -1,45 +1,67 @@
-// src/components/Login.js
 import React, { useState } from 'react';
-import { LoginContainer, LoginForm, Input, Button, ErrorMessage } from './Login.styles';
+import axios from 'axios';
+import {
+  LoginContainer,
+  Title,
+  FormGroup,
+  Label,
+  Input,
+  Button,
+  Message,
+} from './Login.styles';
 
 const Login = () => {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
+  const [formData, setFormData] = useState({
+    email: '',
+    password: '',
+  });
+  const [message, setMessage] = useState('');
+  const [isSuccess, setIsSuccess] = useState(false);
+  const { email, password } = formData;
 
-  const handleSubmit = (e) => {
+  const onChange = (e) => setFormData({ ...formData, [e.target.name]: e.target.value });
+
+  const onSubmit = async (e) => {
     e.preventDefault();
-    // Basic validation
-    if (!username || !password) {
-      setError('Please enter both username and password');
-      return;
+    try {
+      const res = await axios.post('http://localhost:5001/api/auth/login', formData);
+      const { token } = res.data;
+      localStorage.setItem('token', token);
+      setIsSuccess(true);
+      setMessage('Login successful!');
+    } catch (err) {
+      setIsSuccess(false);
+      setMessage('Login failed. Please check your credentials and try again.');
     }
-    // Handle login logic here
-    console.log('Username:', username);
-    console.log('Password:', password);
-    // Clear the error message
-    setError('');
   };
 
   return (
     <LoginContainer>
-      <LoginForm onSubmit={handleSubmit}>
-        <h2>Login</h2>
-        {error && <ErrorMessage>{error}</ErrorMessage>}
-        <Input
-          type="text"
-          placeholder="Username"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-        />
-        <Input
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
+      <Title>Login</Title>
+      <form onSubmit={onSubmit}>
+        <FormGroup>
+          <Label>Email</Label>
+          <Input
+            type="email"
+            name="email"
+            value={email}
+            onChange={onChange}
+            required
+          />
+        </FormGroup>
+        <FormGroup>
+          <Label>Password</Label>
+          <Input
+            type="password"
+            name="password"
+            value={password}
+            onChange={onChange}
+            required
+          />
+        </FormGroup>
         <Button type="submit">Login</Button>
-      </LoginForm>
+      </form>
+      {message && <Message success={isSuccess}>{message}</Message>}
     </LoginContainer>
   );
 };
