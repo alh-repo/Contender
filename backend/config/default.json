@@ -1,4 +1,8 @@
 {
-    "mongoURI":"mongodb://localhost:27017/contenderdb",
-    "jwtSecret": "yourSecretKey"
-}
+    "mongoURI": "mongodb://localhost:27017/contenderdb",
+    "jwtSecret": "yourSecretKey",
+    "emailUser": "yourEmail@gmail.com",
+    "emailPassword": "yourEmailPassword",
+    "clientURL": "http://localhost:3000"
+  }
+  

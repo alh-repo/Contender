@@ -1,28 +1,37 @@
+// backend/server.js
 const express = require('express');
+const connectDB = require('./config/db');
 const cors = require('cors');
-const mongoose = require('mongoose');
-const config = require('config');
 
 const app = express();
 
-// Middleware
-app.use(cors({
-  origin: 'http://localhost:3000', // Your React app's URL
-  credentials: true
-}));
-app.use(express.json());
+// Connect Database
+connectDB();
 
-// Connect to MongoDB
-const db = config.get('mongoURI');
-mongoose.connect(db, {
-//   useNewUrlParser: true,
-//   useUnifiedTopology: true
-})
-  .then(() => console.log('MongoDB Connected'))
-  .catch(err => console.log(err));
+// Init Middleware
+app.use(express.json({ extended: false }));
 
-// Routes
+// Enable CORS
+app.use(cors());
+
+// Define Routes
 app.use('/api/auth', require('./routes/auth'));
 
 const PORT = process.env.PORT || 5001;
-app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
+
+const startServer = async () => {
+  try {
+    app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
+  } catch (error) {
+    console.error('Server failed to start', error);
+    process.exit(1);
+  }
+};
+
+startServer();
+
+// Error handling middleware
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).send('Server Error');
+});

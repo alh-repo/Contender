@@ -1,12 +1,12 @@
+// frontend/src/api.js
 import axios from 'axios';
 
-export const registerUser = async (userData) => {
+export const requestMagicLink = async (email) => {
   try {
-    console.log('Sending user data:', userData); // Add this line for debugging
-    const res = await axios.post('http://localhost:5001/api/auth/register', userData);
-    console.log(res.data);
+    const res = await axios.post('http://localhost:5001/api/auth/request-magic-link', { email });
+    return res.data;
   } catch (err) {
-    console.error('Error registering user: ', err.response.data); // Update this line
+    console.error(err);
     throw err;
   }
 };

@@ -1,126 +1,56 @@
-// routes/api/auth.js
-
 const express = require('express');
-const router = express.Router();
+const nodemailer = require('nodemailer');
+const uuid = require('uuid');
 const bcrypt = require('bcryptjs');
-const jwt = require('jsonwebtoken');
-const config = require('config');
-const { check, validationResult } = require('express-validator');
-const User = require('../models/User');
+const router = express.Router();
 
-// @route    POST api/auth/register
-// @desc     Register user
-// @access   Public
-router.post(
-  '/register',
-  [
-    check('name', 'Name is required').not().isEmpty(),
-    check('email', 'Please include a valid email').isEmail(),
-    check('password', 'Please enter a password with 6 or more characters').isLength({ min: 6 })
-  ],
-  async (req, res) => {
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-      return res.status(400).json({ errors: errors.array() });
+// Configure nodemailer
+const transporter = nodemailer.createTransport({
+    service: 'Gmail',
+    auth: {
+        user: 'your-email@gmail.com',
+        pass: 'your-email-password'
+    }
+});
+
+const magicLinks = {}; // In-memory storage for demo purposes
+
+// Endpoint to request a magic link
+router.post('/request-magic-link', (req, res) => {
+    const { email } = req.body;
+    if (!email) return res.status(400).send('Email is required');
+
+    const token = uuid.v4();
+    magicLinks[token] = { email, createdAt: Date.now() };
+
+    const link = `http://localhost:3000/login?token=${token}`;
+
+    const mailOptions = {
+        from: 'your-email@gmail.com',
+        to: email,
+        subject: 'Your Magic Link',
+        text: `Click here to log in: ${link}`
+    };
+
+    transporter.sendMail(mailOptions, (error, info) => {
+        if (error) return res.status(500).send(error.toString());
+        res.send('Magic link sent');
+    });
+});
+
+// Endpoint to verify the magic link token
+router.get('/verify-magic-link', (req, res) => {
+    const { token } = req.query;
+    const magicLink = magicLinks[token];
+
+    if (!magicLink || Date.now() - magicLink.createdAt > 15 * 60 * 1000) {
+        return res.status(400).send('Invalid or expired token');
     }
 
-    const { name, email, password, username } = req.body;
+    const email = magicLink.email;
+    delete magicLinks[token];
 
-    try {
-      let user = await User.findOne({ email });
-
-      if (user) {
-        return res.status(400).json({ errors: [{ msg: 'User already exists' }] });
-      }
-
-      user = new User({
-        name,
-        email,
-        password,
-        username
-      });
-
-      const salt = await bcrypt.genSalt(10);
-      user.password = await bcrypt.hash(password, salt);
-
-      await user.save();
-
-      const payload = {
-        user: {
-          id: user.id
-        }
-      };
-
-      jwt.sign(
-        payload,
-        config.get('jwtSecret'),
-        { expiresIn: '5 days' },
-        (err, token) => {
-          if (err) throw err;
-          res.json({ token });
-        }
-      );
-    } catch (err) {
-      console.error(err.message);
-      res.status(500).send('Server error');
-    }
-  }
-);
-
-// @route    POST api/auth/login
-// @desc     Authenticate user & get token
-// @access   Public
-router.post(
-  '/login',
-  [
-    check('email', 'Please include a valid email').isEmail(),
-    check('password', 'Password is required').exists()
-  ],
-  async (req, res) => {
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-      return res.status(400).json({ errors: errors.array() });
-    }
-
-    const { email, password } = req.body;
-
-    try {
-      let user = await User.findOne({ email });
-
-      if (!user) {
-        return res
-          .status(400)
-          .json({ errors: [{ msg: 'Invalid Credentials' }] });
-      }
-
-      const isMatch = await bcrypt.compare(password, user.password);
-
-      if (!isMatch) {
-        return res
-          .status(400)
-          .json({ errors: [{ msg: 'Invalid Credentials' }] });
-      }
-
-      const payload = {
-        user: {
-          id: user.id
-        }
-      };
-
-      jwt.sign(
-        payload,
-        config.get('jwtSecret'),
-        { expiresIn: '5 days' },
-        (err, token) => {
-          if (err) throw err;
-          res.json({ token });
-        }
-      );
-    } catch (err) {
-      console.error(err.message);
-      res.status(500).send('Server error');
-    }
-  }
-);
+    res.send({ message: `Logged in as ${email}`, email });
+});
 
 module.exports = router;
